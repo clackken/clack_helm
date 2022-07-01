@@ -42,4 +42,4 @@ maintainers:
 name: imgproxy
 sources:
 - https://github.com/imgproxy/imgproxy
-version: 0.8.16
+version: 0.8.17
