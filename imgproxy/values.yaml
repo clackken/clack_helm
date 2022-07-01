@@ -1,4 +1,5 @@
 ---
+fullnameOverride: ""
 # Docker image repository, tag, policy and secrets for Kubernetes to pull it.
 image:
   repo: darthsim/imgproxy
