@@ -2,17 +2,16 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: {{ include "s3pvc.fullname" . }}
-  namespace: {{- .Values.namespace }}
   labels:
   {{- include "s3pvc.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      {{- include "s3pvc.selectorLabels" . | nindent 6 }}
+  {{- include "s3pvc.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "s3pvc.selectorLabels" . | nindent 8 }}
+    {{- include "s3pvc.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -31,11 +30,11 @@ spec:
             - secretRef:
                 name: {{ include "s3pvc.fullname" . }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+          {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            {{- toYaml .Values.volumeMounts | nindent 12 }}
+      {{- toYaml .Values.volumeMounts | nindent 12 }}
       volumes:
-        {{- toYaml .Values.volumes | nindent 8 }}
+      {{- toYaml .Values.volumes | nindent 8 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
       {{- toYaml . | nindent 8 }}
@@ -46,5 +45,5 @@ spec:
       {{- end }}
       {{- with .Values.tolerations }}
       tolerations:
-      {{- toYaml . | nindent 8 }}
+  {{- toYaml . | nindent 8 }}
   {{- end }}

@@ -27,7 +27,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v1
     appVersion: 3.5.0
-    created: "2022-07-04T11:24:34.7461573+07:00"
+    created: "2022-07-04T11:53:28.1885359+07:00"
     description: A fast and secure standalone server for resizing and converting remote
       images. The main principles of imgproxy are simplicity, speed, and security.
     digest: c003200132c7be2c68f8a4652eaced1600c38c6f4d4783351a741ce31a3f8a2c
@@ -76,7 +76,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v1
     appVersion: 3.5.0
-    created: "2022-07-04T11:24:34.7441548+07:00"
+    created: "2022-07-04T11:53:28.1863671+07:00"
     description: A fast and secure standalone server for resizing and converting remote
       images. The main principles of imgproxy are simplicity, speed, and security.
     digest: 199bdc9e5b5c2e1fe1a716e760bb73e3a96db5d1b3f2ee417ae9fa77d244c068
@@ -102,12 +102,22 @@ entries:
   s3pvc:
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-07-04T11:24:34.7471801+07:00"
+    created: "2022-07-04T11:53:28.1891034+07:00"
     description: Mount s3 to PVC use hostpath
-    digest: fc15b21bdd9523e62ff4ea208ffef0c56cf202285be1cfaf2ebeb465e3264b73
+    digest: 8bdcab4c69e179549b1cfcbbc4a5eca97070aa450c3f032182145444fc2738b7
+    name: s3pvc
+    type: application
+    urls:
+    - https://clackken.github.io/clack_helm/repo/s3pvc-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2022-07-04T11:53:28.1891034+07:00"
+    description: Mount s3 to PVC use hostpath
+    digest: 0811211c80f34cde2c4aaa64d397d4db9a1bd0f2000dcc3346aaf06530188399
     name: s3pvc
     type: application
     urls:
     - https://clackken.github.io/clack_helm/repo/s3pvc-1.0.1.tgz
     version: 1.0.1
-generated: "2022-07-04T11:24:34.7390364+07:00"
+generated: "2022-07-04T11:53:28.1839507+07:00"
