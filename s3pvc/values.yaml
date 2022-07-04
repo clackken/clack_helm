@@ -1,0 +1,82 @@
+# Default values for s3pvc.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: clackkensmith/dec-s3fuse
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: "azc-s3fuse"
+namespace: default
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  privileged: true
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+envFrom:
+  - configMapRef:
+      name: s3-config
+
+volumeMounts:
+  - name: devfuse
+    mountPath: /dev/fuse
+  - name: mntdatas3fs
+    mountPath: /var/s3fs:shared
+
+volumes:
+  - name: devfuse
+    hostPath:
+      path: /dev/fuse
+  - name: mntdatas3fs
+    hostPath:
+      path: /home/s3data
+
+secret:
+  S3_REGION: ""
+  S3_BUCKET: ""
+  S3_ENDPOINT: ""
+  AWS_KEY: ""
+  AWS_SECRET_KEY: ""
