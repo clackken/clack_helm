@@ -27,7 +27,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v1
     appVersion: 3.5.0
-    created: "2022-07-04T12:32:16.5813999+07:00"
+    created: "2022-07-11T10:27:32.4253285+07:00"
     description: A fast and secure standalone server for resizing and converting remote
       images. The main principles of imgproxy are simplicity, speed, and security.
     digest: c003200132c7be2c68f8a4652eaced1600c38c6f4d4783351a741ce31a3f8a2c
@@ -76,7 +76,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v1
     appVersion: 3.5.0
-    created: "2022-07-04T12:32:16.5782072+07:00"
+    created: "2022-07-11T10:27:32.4236664+07:00"
     description: A fast and secure standalone server for resizing and converting remote
       images. The main principles of imgproxy are simplicity, speed, and security.
     digest: 199bdc9e5b5c2e1fe1a716e760bb73e3a96db5d1b3f2ee417ae9fa77d244c068
@@ -99,10 +99,20 @@ entries:
     urls:
     - https://clackken.github.io/clack_helm/repo/imgproxy-0.8.16.tgz
     version: 0.8.16
+  konga:
+  - apiVersion: v1
+    appVersion: 1.0.1
+    created: "2022-07-11T10:27:32.4263954+07:00"
+    description: A Helm chart for Konga in Kubernetes
+    digest: a7aca4b10eac09d1fc26a58f140a6dfd979d4bb29b8699a77b4480eeec98e039
+    name: konga
+    urls:
+    - https://clackken.github.io/clack_helm/repo/konga-1.0.1.tgz
+    version: 1.0.1
   s3pvc:
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-07-04T12:32:16.5819043+07:00"
+    created: "2022-07-11T10:27:32.426899+07:00"
     description: Mount s3 to PVC use hostpath
     digest: ff92261d8ebf059cf06ebc4c38c7ece5124d2a55a1417314f513d311b3b53d13
     name: s3pvc
@@ -110,4 +120,4 @@ entries:
     urls:
     - https://clackken.github.io/clack_helm/repo/s3pvc-1.0.1.tgz
     version: 1.0.1
-generated: "2022-07-04T12:32:16.5760773+07:00"
+generated: "2022-07-11T10:27:32.4215932+07:00"

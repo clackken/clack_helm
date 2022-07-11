@@ -5,15 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: clackkensmith/dec-s3fuse
-  pullPolicy: IfNotPresent
+  repository: clackkensmith/s3fuse
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: "azc-s3fuse"
-namespace: default
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -56,10 +55,6 @@ tolerations: []
 
 affinity: {}
 
-envFrom:
-  - configMapRef:
-      name: s3-config
-
 volumeMounts:
   - name: devfuse
     mountPath: /dev/fuse
@@ -74,9 +69,9 @@ volumes:
     hostPath:
       path: /home/s3data
 
-secret:
+env:
   S3_REGION: ""
-  S3_BUCKET: ""
-  S3_ENDPOINT: ""
-  AWS_KEY: ""
-  AWS_SECRET_KEY: ""
+  S3_BUCKET: "dec-prod"
+  S3_ENDPOINT: "http://10.4.0.78:9000"
+  AWS_KEY: "VHKTT6201QSH343JX45G"
+  AWS_SECRET_KEY: "PhRYSWdXZTgaPTON5gGvSuisJBnzeK8m8v9vf0K8"

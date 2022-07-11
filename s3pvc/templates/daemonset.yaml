@@ -26,14 +26,23 @@ spec:
           {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ['sh','-c','./run.sh']
           envFrom:
             - configMapRef:
-                name: {{ include "s3pvc.fullname" . }}
+                name: {{ include "s3pvc.fullname" . }}-env
           resources:
           {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
+            - name: runsh
+              mountPath: /run.sh
+              subPath: run.sh
+              readOnly: false
       {{- toYaml .Values.volumeMounts | nindent 12 }}
       volumes:
+        - name: runsh
+          configMap:
+            name: {{ include "s3pvc.fullname" . }}-run
+            defaultMode: 0777
       {{- toYaml .Values.volumes | nindent 8 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
