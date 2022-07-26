@@ -12,7 +12,7 @@ image:
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: "azc-s3fuse"
+fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -69,9 +69,10 @@ volumes:
     hostPath:
       path: /home/s3data
 
+# After update your s3
 env:
   S3_REGION: ""
-  S3_BUCKET: "dec-prod"
-  S3_ENDPOINT: "http://10.4.0.78:9000"
-  AWS_KEY: "VHKTT6201QSH343JX45G"
-  AWS_SECRET_KEY: "PhRYSWdXZTgaPTON5gGvSuisJBnzeK8m8v9vf0K8"
+  S3_BUCKET: ""
+  S3_ENDPOINT: ""
+  AWS_KEY: ""
+  AWS_SECRET_KEY: ""
