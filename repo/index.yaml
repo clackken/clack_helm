@@ -27,7 +27,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v1
     appVersion: 3.5.0
-    created: "2022-07-26T17:37:57.2182219+07:00"
+    created: "2022-07-28T13:57:51.1880184+07:00"
     description: A fast and secure standalone server for resizing and converting remote
       images. The main principles of imgproxy are simplicity, speed, and security.
     digest: c003200132c7be2c68f8a4652eaced1600c38c6f4d4783351a741ce31a3f8a2c
@@ -76,7 +76,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v1
     appVersion: 3.5.0
-    created: "2022-07-26T17:37:57.2153566+07:00"
+    created: "2022-07-28T13:57:51.1852625+07:00"
     description: A fast and secure standalone server for resizing and converting remote
       images. The main principles of imgproxy are simplicity, speed, and security.
     digest: 199bdc9e5b5c2e1fe1a716e760bb73e3a96db5d1b3f2ee417ae9fa77d244c068
@@ -102,7 +102,7 @@ entries:
   konga:
   - apiVersion: v1
     appVersion: 1.0.1
-    created: "2022-07-26T17:37:57.2192488+07:00"
+    created: "2022-07-28T13:57:51.1891185+07:00"
     description: A Helm chart for Konga in Kubernetes
     digest: a7aca4b10eac09d1fc26a58f140a6dfd979d4bb29b8699a77b4480eeec98e039
     name: konga
@@ -111,8 +111,18 @@ entries:
     version: 1.0.1
   s3pvc:
   - apiVersion: v2
+    appVersion: 1.0.3
+    created: "2022-07-28T13:57:51.1912712+07:00"
+    description: Mount s3 to PVC use hostpath
+    digest: c106e08d612dd29dbf0df2f93577658115fa15195785cfd0c93558897b945e70
+    name: s3pvc
+    type: application
+    urls:
+    - https://clackken.github.io/clack_helm/repo/s3pvc-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
     appVersion: 1.0.2
-    created: "2022-07-26T17:37:57.2208782+07:00"
+    created: "2022-07-28T13:57:51.1907651+07:00"
     description: Mount s3 to PVC use hostpath
     digest: 1d72135e77908a7dd56d271ff69d6f4164004612f786d7d93760916351ffc59a
     name: s3pvc
@@ -122,7 +132,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-07-26T17:37:57.2202932+07:00"
+    created: "2022-07-28T13:57:51.1901842+07:00"
     description: Mount s3 to PVC use hostpath
     digest: ff92261d8ebf059cf06ebc4c38c7ece5124d2a55a1417314f513d311b3b53d13
     name: s3pvc
@@ -130,4 +140,4 @@ entries:
     urls:
     - https://clackken.github.io/clack_helm/repo/s3pvc-1.0.1.tgz
     version: 1.0.1
-generated: "2022-07-26T17:37:57.2119636+07:00"
+generated: "2022-07-28T13:57:51.1819436+07:00"

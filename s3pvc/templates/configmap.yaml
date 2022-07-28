@@ -38,29 +38,29 @@ data:
       insist = true
     }
 
-    sync {
-      default.rsync,
-      source = "/var/s3fs",
-      target = "/var/s3fs:shared",
-      delete = 'running',
-      delay = 0,
-      rsync = {
-        update = true,
-        times = true,
-        archive = true,
-        compress = true,
-        perms = false,
-        acls = true,
-        owner = false,
-      }
-    }
+    #sync {
+    #  default.rsync,
+    #  source = "/var/s3fs",
+    #  target = "/var/s3fs:shared",
+    #  delete = 'running',
+    #  delay = 0,
+    #  rsync = {
+    #    update = true,
+    #    times = true,
+    #    archive = true,
+    #    compress = true,
+    #    perms = false,
+    #    acls = true,
+    #    owner = false,
+    #  }
+    #}
 
     sync {
       default.rsync,
       source = "/var/s3fs:shared",
       target = "/var/s3fs",
       delete = 'running',
-      delay = 0,
+      delay = 5,
       rsync = {
         update = true,
         times = true,
