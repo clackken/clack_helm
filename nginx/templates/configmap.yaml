@@ -1,0 +1,26 @@
+{{- range $key, $value := .Values.configmaps }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $value.name }}
+  annotations:
+    "helm.sh/resource-policy": keep
+data:
+  {{- $value.file_name | nindent 2}}: |
+    {{- $value.content | nindent 4}}
+---
+{{- end}}
+{{- range $ks, $vs := .Values.sites }}
+  {{- range $kc, $vc := $vs.configmaps}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $vc.name }}
+  annotations:
+    "helm.sh/resource-policy": keep
+data:
+  {{- $vc.file_name | nindent 2}}: |
+    {{- $vc.content | nindent 4}}
+---
+  {{- end}}
+{{- end}}
