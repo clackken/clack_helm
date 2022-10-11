@@ -10,17 +10,21 @@ data:
     {{- $value.content | nindent 4}}
 ---
 {{- end}}
+{{- if gt len(.Values.sites) 0}}
 {{- range $ks, $vs := .Values.sites }}
-  {{- range $kc, $vc := $vs.configmaps}}
+  {{- if gt len($vs.configmaps) 0}}
+    {{- range $kc, $vc := $vs.configmaps}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ $vc.name }}
+  name: {{ $vc.file_name }}
   annotations:
     "helm.sh/resource-policy": keep
 data:
   {{- $vc.file_name | nindent 2}}: |
     {{- $vc.content | nindent 4}}
 ---
+    {{- end}}
   {{- end}}
+{{- end}}
 {{- end}}
