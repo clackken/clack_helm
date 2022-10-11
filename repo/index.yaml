@@ -27,7 +27,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v1
     appVersion: 3.5.0
-    created: "2022-10-11T19:26:28.373886+07:00"
+    created: "2022-10-11T19:38:58.5984+07:00"
     description: A fast and secure standalone server for resizing and converting remote
       images. The main principles of imgproxy are simplicity, speed, and security.
     digest: c003200132c7be2c68f8a4652eaced1600c38c6f4d4783351a741ce31a3f8a2c
@@ -76,7 +76,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v1
     appVersion: 3.5.0
-    created: "2022-10-11T19:26:28.372025+07:00"
+    created: "2022-10-11T19:38:58.595839+07:00"
     description: A fast and secure standalone server for resizing and converting remote
       images. The main principles of imgproxy are simplicity, speed, and security.
     digest: 199bdc9e5b5c2e1fe1a716e760bb73e3a96db5d1b3f2ee417ae9fa77d244c068
@@ -102,7 +102,7 @@ entries:
   konga:
   - apiVersion: v1
     appVersion: 1.0.1
-    created: "2022-10-11T19:26:28.37436+07:00"
+    created: "2022-10-11T19:38:58.598904+07:00"
     description: A Helm chart for Konga in Kubernetes
     digest: a7aca4b10eac09d1fc26a58f140a6dfd979d4bb29b8699a77b4480eeec98e039
     name: konga
@@ -111,10 +111,20 @@ entries:
     version: 1.0.1
   nginx:
   - apiVersion: v2
-    appVersion: 1.1.1
-    created: "2022-10-11T19:26:28.375349+07:00"
+    appVersion: 1.1.2
+    created: "2022-10-11T19:38:58.600173+07:00"
     description: A nginx chart for Kubernetes
-    digest: 3f848e984ab92461344c9e6250a4d278faa51d2ad33816d45b05c5323bab24ed
+    digest: ffaee465557508d3755371fed5a35a3831dee458d159e9c4605039e09662c728
+    name: nginx
+    type: application
+    urls:
+    - https://clackken.github.io/clack_helm/repo/nginx-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: 1.1.1
+    created: "2022-10-11T19:38:58.599787+07:00"
+    description: A nginx chart for Kubernetes
+    digest: a10ac94127a1421f14e7b15fb2eae9b3ea604d90d683726d3f83dcfcb240af45
     name: nginx
     type: application
     urls:
@@ -122,7 +132,7 @@ entries:
     version: 1.1.1
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2022-10-11T19:26:28.375074+07:00"
+    created: "2022-10-11T19:38:58.599281+07:00"
     description: A nginx chart for Kubernetes
     digest: bb298a948c194cc66f7cb8f4f455c1c5a7c2343c6071746c76db3b3c5ce32cd8
     name: nginx
@@ -133,7 +143,7 @@ entries:
   s3pvc:
   - apiVersion: v2
     appVersion: 1.0.3
-    created: "2022-10-11T19:26:28.376437+07:00"
+    created: "2022-10-11T19:38:58.601154+07:00"
     description: Mount s3 to PVC use hostpath
     digest: c106e08d612dd29dbf0df2f93577658115fa15195785cfd0c93558897b945e70
     name: s3pvc
@@ -143,7 +153,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: 1.0.2
-    created: "2022-10-11T19:26:28.37605+07:00"
+    created: "2022-10-11T19:38:58.600818+07:00"
     description: Mount s3 to PVC use hostpath
     digest: 1d72135e77908a7dd56d271ff69d6f4164004612f786d7d93760916351ffc59a
     name: s3pvc
@@ -153,7 +163,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-11T19:26:28.375678+07:00"
+    created: "2022-10-11T19:38:58.600513+07:00"
     description: Mount s3 to PVC use hostpath
     digest: ff92261d8ebf059cf06ebc4c38c7ece5124d2a55a1417314f513d311b3b53d13
     name: s3pvc
@@ -161,4 +171,4 @@ entries:
     urls:
     - https://clackken.github.io/clack_helm/repo/s3pvc-1.0.1.tgz
     version: 1.0.1
-generated: "2022-10-11T19:26:28.369451+07:00"
+generated: "2022-10-11T19:38:58.594003+07:00"

@@ -109,7 +109,7 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12}}
           {{- end}}
-          {{- if gt len(.Values.sites) 0}}
+          {{- if gt (len .Values.sites) 0 }}
           {{- range $k, $v := .Values.sites}}
             {{- toYaml $v.volumeMounts | nindent 12}}
           {{- end}}

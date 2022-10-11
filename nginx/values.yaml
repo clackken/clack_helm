@@ -1,3 +1,97 @@
+## Default values for nginx.
+## This is a YAML-formatted file.
+## Declare variables to be passed into your templates.
+#
+#replicaCount: 1
+#
+#image:
+#  repository: clackkensmith/azc-nginx
+#  pullPolicy: Always
+#  # Overrides the image tag whose default is the chart appVersion.
+#  tag: "latest"
+#
+#imagePullSecrets: []
+#nameOverride: ""
+#fullnameOverride: ""
+#
+#serviceAccount:
+#  # Specifies whether a service account should be created
+#  create: true
+#  # Annotations to add to the service account
+#  annotations: {}
+#  # The name of the service account to use.
+#  # If not set and create is true, a name is generated using the fullname template
+#  name: ""
+#
+#podAnnotations: {}
+#
+#podSecurityContext: {}
+#  # fsGroup: 2000
+#
+#securityContext: {}
+#  # capabilities:
+#  #   drop:
+#  #   - ALL
+#  # readOnlyRootFilesystem: true
+##   runAsNonRoot: true
+##   runAsUser: 1000
+#
+#service:
+#  type: ClusterIP
+#  port: 80
+#
+#ingress:
+#  enabled: false
+#  className: ""
+#  annotations: {}
+#    # kubernetes.io/ingress.class: nginx
+#    # kubernetes.io/tls-acme: "true"
+#  hosts:
+#    - host: chart-example.local
+#      paths:
+#        - path: /
+#          pathType: ImplementationSpecific
+#  tls: []
+#  #  - secretName: chart-example-tls
+#  #    hosts:
+#  #      - chart-example.local
+#
+#resources: {}
+#  # We usually recommend not to specify default resources and to leave this as a conscious
+#  # choice for the user. This also increases chances charts run on environments with little
+#  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+#  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+#  # limits:
+#  #   cpu: 100m
+#  #   memory: 128Mi
+#  # requests:
+#  #   cpu: 100m
+#  #   memory: 128Mi
+#
+#autoscaling:
+#  enabled: true
+#  minReplicas: 1
+#  maxReplicas: 10
+##  targetCPUUtilizationPercentage: 80
+#  targetMemoryUtilizationPercentage: 80
+#
+#nodeSelector: {}
+#
+#tolerations: []
+#
+#affinity: {}
+#
+#configmaps: {}
+#
+#sites: {}
+#
+#initContainers: {}
+#
+#volumes: {}
+#
+#volumeMounts: {}
+
+
 # Default values for nginx.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -12,7 +106,7 @@ image:
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "nginx-aff"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -26,13 +120,13 @@ serviceAccount:
 podAnnotations: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
+# fsGroup: 2000
 
 securityContext: {}
   # capabilities:
   #   drop:
   #   - ALL
-  # readOnlyRootFilesystem: true
+# readOnlyRootFilesystem: true
 #   runAsNonRoot: true
 #   runAsUser: 1000
 
@@ -45,7 +139,7 @@ ingress:
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
       paths:
@@ -66,13 +160,13 @@ resources: {}
   #   memory: 128Mi
   # requests:
   #   cpu: 100m
-  #   memory: 128Mi
+#   memory: 128Mi
 
 autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 10
-#  targetCPUUtilizationPercentage: 80
+  #  targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
@@ -81,12 +175,104 @@ tolerations: []
 
 affinity: {}
 
-configmaps: {}
+configmaps:
+  - name: nginx-aff-conf
+    mountName: nginx.conf
+    file_name: nginx.conf
+    content: |
+      user  www-data;
+      worker_processes  auto;
+      error_log  /var/log/nginx/error.log notice;
+      pid        /var/run/nginx.pid;
 
-sites: {}
+      events {
+        worker_connections  1024;
+      }
 
-initContainers: {}
+      http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+      
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+        '$status $body_bytes_sent "$http_referer" '
+        '"$http_user_agent" "$http_x_forwarded_for"';
+        access_log  /var/log/nginx/access.log  main;
+      
+        sendfile        on;
+        #tcp_nopush     on;
+        keepalive_timeout  65;
+        #gzip  on;
+        upstream __php {
+          server azc-phpfpm:9000;
+        }
+        include /etc/nginx/conf.d/*.conf;
+      }
+    mountPath: /etc/nginx/nginx.conf
+    subPath: nginx.conf
+sites:
+  - name: nginx-aff
+    configmaps:
+      - name: nginx-aff
+        mountName: nginx-aff
+        file_name: aff.azc88vn.com.conf
+        content: |
+          server {
+            listen 80;
+            server_name aff.azc88vn.com www.aff.azc88vn.com;
 
-volumes: {}
+            location / {
+              return 301 https://$host$request_uri;
+            }
+          }
+          server {
+            listen 443 ssl http2;
+            server_name aff.azc88vn.com;
+            access_log /var/log/nginx/access_azc88vn_com.log;
+            ssl_certificate /etc/nginx/ssl/azc_fullchain.pem;
+            ssl_certificate_key /etc/nginx/ssl/azc_privkey.pem;
 
-volumeMounts: {}
+            root /var/www/aff;
+            index index.html;
+
+            location / {
+              try_files $uri /index.html;
+            }
+
+            location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+              # Some basic cache-control for static files to be sent to the browser
+              expires max;
+              add_header Pragma public;
+              add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+            }
+          }
+    volumeMounts:
+      - name: s3fs
+        mountPath: /var/www/aff
+        subPath: aff
+      - name: nginx-aff
+        mountPath: /etc/nginx/conf.d/aff.azc88vn.com.conf
+        subPath: aff.azc88vn.com.conf
+    volumes:
+      - name: nginx-aff
+        configMap:
+          name: aff.azc88vn.com.conf
+initContainers:
+  - name: init-aff
+    image: clackkensmith/azc-aff-init:latest
+    imagePullPolicy: Always
+    command: ["sh","-c","cd /app && git reset --hard HEAD && git pull && npm run build && cp -Rf /app/dist/* /hdata && chown -R 1000:1000 /hdata"]
+    volumeMounts:
+      - mountPath: /hdata
+        name: s3fs
+        subPath: aff
+volumes:
+  - name: nginx-conf
+    configMap:
+      name: nginx-conf
+  - name: s3fs
+    hostPath:
+      path: /home/s3data
+volumeMounts:
+  - name: nginx-conf
+    mountPath: /etc/nginx/nginx.conf
+    subPath: nginx.conf
